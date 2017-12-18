@@ -7,7 +7,7 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="/dashboard" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+    <div id="breadcrumb"> <a href="/admin/dashboard" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
     <h1>Dashboard</h1>
   </div>
 <!--End-breadcrumbs-->
@@ -33,9 +33,9 @@
                   <th>Actions</th>
                 </tr>
               </thead>
-                @foreach($types as $type)
+                @foreach($type as $type)
                   <tbody>
-                    <tr class="gradeX">
+                    <tr>
                       <td>{{$type->reserv_id}}</td>
                       <td>{{$type->cust_fname . " " . $type->cust_lname}}</td>
                       <td>{{$type ->reserv_guestNo}}</td>
@@ -43,7 +43,10 @@
                       <td>{{$type->place}}</td>
                       <td>{{$type->reserv_date}}</td>
                       <td>{{$type->reserv_time}}</td>
-                      <td>fl;ajsdflsf</td>
+                      <td >
+                        <button class="btn btn-primary icon-pencil"> Edit</button>
+                        <button class="btn btn-danger icon-trash"> Delete</button>
+                      </td>
                     </tr>
                   </tbody>
                 @endforeach

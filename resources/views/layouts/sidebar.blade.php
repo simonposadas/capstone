@@ -84,7 +84,7 @@ function resetMenu() {
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="/dashboard" class="sAdd">fasdfasfsad</a></h1>
+  <h1><a href="admin.dashboard" class="sAdd">fasdfasfsad</a></h1>
 </div>
 <!--close-Header-part--> 
 
@@ -114,8 +114,8 @@ function resetMenu() {
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
   <ul>
-    <li><a href="/dashboard"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
-    <li> <a href="/admin/reservations"><i class="icon icon-table"></i> <span>Reservations</span></a> </li>
+    <li><a href="/admin/dashboard"><i class="icon icon-home"></i> <span>Dashboard</span></a> </li>
+    <li> <a href="/admin/reservation"><i class="icon icon-table"></i> <span>Reservations</span></a> </li>
     <li class="submenu"> <a href="#"><i class="icon icon-th"></i> <span>Maintenance</span> <span class=""></span><i class="icon-chevron-down"></i></a>
       <ul>
         <li><a href="/admin/food">Food</a></li>
