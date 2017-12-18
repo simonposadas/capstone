@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 use App\Model\ReservationDetail;
+use App\Model\FoodDetail;
+use App\Model\FoodType;
+use App\Model\PackageDetail;
+use App\Model\Worker;
 use App\Http\Requests\Reservation\ReservationIdRequest;
 use Notification;
 use App\Notifications\ReservationApprove;
@@ -16,13 +20,6 @@ use App\Http\Controllers\Controller;
  * 
  */
 class AdminController extends Controller {
-   // /**
-   //  * 
-   //  */
-   // public function __construct() {
-   //     $this->middleware('auth');
-   // }
-
     /**
      * View directory
      * @var type 
@@ -34,14 +31,15 @@ class AdminController extends Controller {
      * @return type
      */
     public function dashboard() {
-        $types = ReservationDetail::where('status', 0)
+        $type = ReservationDetail::where('status', 0)
         ->join('customer_info', 'customer_info.cust_id', '=', 'reservation_details.cust_id')
         ->join('event_details', 'event_details.event_id', '=', 'reservation_details.event_id')
         ->get();
 
-        // dd($type);
-        return view($this->view . 'dashboard', ['types' => $types]);
+        return view($this->view . 'dashboard', ['type' => $type]);
     }
+    //END DASHBOARD
+
 
     /**
      * Approve the reservation of customer
@@ -98,54 +96,6 @@ class AdminController extends Controller {
         return redirect()->back();
     }
 
-
-    /*  -- - - -- SEARCH -- - - -- */
-
-     public function scopeSearch()
-    {
-        $searchItem = $_GET["searchItem"];
-
-        $result = \DB::table('reservation_details')
-        ->join('customer_info', 'customer_info.cust_id', '=', 'reservation_details.cust_id')
-        ->where('cust_fname', $searchItem)
-        ->OrWhere('cust_lname', $searchItem)
-        ->OrWhere('reserv_id', $searchItem)
-        ->select('reservation_details.*', 'customer_info.*')->get();
-
-        if(count($result) == 0){
-            alert()->error('No result to display. Please try again.', 'Error')->persistent('Close');
-        return redirect()->back();
-        }
-        //return empty(request()->search) ? $q : $q->where('cust_fname', 'like', '%'.request()->search.'%');
-        return view('admin.reservation.index')->with('reservation_details', $result);
-    }
-
-     public function scopeSearch3()
-    {
-        $searchItem = $_GET["searchItem3"];
-
-        $result = \DB::table('worker')
-        ->join('worker_role', 'worker_role.worker_role_id', '=', 'worker.worker_role_id')
-        ->where('worker_fname', $searchItem)
-        ->OrWhere('worker_lname', $searchItem)
-        ->OrWhere('worker_mname', $searchItem)
-        ->OrWhere('worker_age', $searchItem)
-        ->select('worker.*')->get();
-
-        if(count($result) == 0){
-            alert()->error('No result to display. Please try again.', 'Error')->persistent('Close');
-        return redirect()->back();
-        }
-        //return empty(request()->search) ? $q : $q->where('cust_fname', 'like', '%'.request()->search.'%');
-        return view('/admin/
-            worker')->with('worker', $result);
-    }
-
-    
-    
-    /* x xx SEARCH xx x */
-
-
     /**
      * Get reservation details
      * @param Request $req
@@ -160,25 +110,27 @@ class AdminController extends Controller {
         return response()->json($reservation);
     }
 
+
+    // FOOD
     public function food(){
-        $var = DB::table('food_details')->join('food_type','food_details.food_type_id','=','food_type.food_type_id')->where('food_details.status',0)->get();
-        $type = DB::table('food_type')->where('status',0)->get();
-        return view('/admin/food',['var' => $var,'type' => $type ]);
+        $var = FoodDetail::join('food_type','food_details.food_type_id','=','food_type.food_type_id')->where('food_details.status',0)->get();
+        $types = FoodType::where('status',0)->get();
+        return view($this->view . 'food', ['var' => $var,'types' => $types ]);
     }
     public function getfood(Request $req){
         $type = DB::table('food_details')->where('food_id',$req->id)->get();
-        return response()->json($type);
+        return response()->json($types);
     }
 
-    public function addfood(){
-        DB::table('food_details')->insert([ 
+    public function addFood(){
+        FoodDetails::insert([ 
             'food_name' => $_POST['name'],
             'food_type_id' => $_POST['type'],
             'price' => $_POST['price'],
             ]);
         alert()->success('Successfully added a food', 'Success')->persistent('Close');
  
-        return redirect('/admin/food');
+        return view($this->view . 'food');
     }
     
     public function editfood(){
@@ -187,19 +139,50 @@ class AdminController extends Controller {
         // }
         // alert()->error('Something went wrong editing the food', 'Error')->persistent('Close');
 
-        DB::table('food_details')->where('food_id', $_POST['id'])->update(['food_name' => $_POST['name'], 'price' => $_POST['price']]);
+        FoodDetails::where('food_id', $_POST['id'])->update(['food_name' => $_POST['name'], 'price' => $_POST['price']]);
 
         alert()->success('Successfully edited a food', 'Success')->persistent('Close');
 
         return redirect()->back();
     }
     public function deletefood(){
-        DB::table('food_details')->where('food_id',$_POST['id'])->update([ 
+        FoodDetails::where('food_id',$_POST['id'])->update([ 
             'status' => 1
             ]);
         alert()->success('Successfully deleted a food', 'Success')->persistent('Close');
         return redirect('/admin/food');
     }
+    // END FOOD
+
+
+    // PACKAGES
+
+    public  function packages()
+    {
+        $package = PackageDetail::where('status', 0)->get();
+        return view($this->view . 'packages', ['packages' => $package]);
+    }
+
+    // END PACKAGES
+
+
+    // EMPLOYEE
+
+    public  function employee()
+    {
+        $employee = Worker::join('worker_role', 'worker.worker_role_id', '=', 'worker_role.worker_role_id')
+        ->where('worker.status', 0)->get();
+        return view($this->view . 'employee', ['employee' => $employee]);
+    }
+    
+    // END EMPLOYEE
+    
+
+
+
+
+
+
     public function foodtype(){
         $type = DB::table('food_type')->where('status',0)->get();
         return view('/admin/foodtype',['type' => $type ]);
@@ -230,6 +213,8 @@ class AdminController extends Controller {
         alert()->success('Successfully deleted a food type', 'Success')->persistent('Close');
         return redirect('/admin/foodtype');
     }
+
+
     public function workerrole(){
         $type = DB::table('worker_role')->where('status',0)->get();
         return view('/admin/workerrole',['type' => $type ]);
