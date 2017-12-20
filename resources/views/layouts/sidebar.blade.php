@@ -14,8 +14,9 @@
 <link rel="stylesheet" href="{{ asset('css/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/matrix-style.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/matrix-media.css') }}" />
-<link rel="stylesheet" href="{{ asset('css/bootstrap-wysihtml.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/bootstrap-wysihtml5.css') }}" />
 <link href="{{ asset('font/css/font-awesome.css') }}" rel="stylesheet" />
+<link href='{{ asset('css/sweetalert.css') }}' rel='stylesheet'>
 <link rel="stylesheet" href="{{ asset('css/jquery.gritter.css') }}" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 
@@ -30,7 +31,6 @@
 <script src="{{ asset('js/fullcalendar.min.js') }}"></script> 
 <script src="{{ asset('js/matrix.js') }}"></script> 
 <script src="{{ asset('js/matrix.dashboard.js') }}"></script> 
-<script src="{{ asset('js/matrix.dataTables.js') }}"></script> 
 <script src="{{ asset('js/jquery.gritter.min.js') }}"></script> 
 <script src="{{ asset('js/matrix.interface.js') }}"></script> 
 <script src="{{ asset('js/matrix.chat.js') }}"></script> 
@@ -50,10 +50,9 @@
 <script src="{{ asset('js/wysihtml5-0.3.0.js') }}"></script> 
 <script src="{{ asset('js/bootstrap-colorpicker.js') }}"></script> 
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script> 
-<script src="{{ asset('js/maruti.js') }}"></script> 
 <script src="{{ asset('js/jquery.flot.min.js') }}"></script> 
 <script src="{{ asset('js/jquery.flot.pie.min.js') }}"></script> 
-<script src="{{ asset('js/jquery.flot.resize.min.js') }}"></script> 
+<script src="{{ asset('js/sweetalert.min.js') }}"></script> 
 
 <script type="text/javascript">
   // This function is called from the pop-up menus to transfer to
@@ -84,14 +83,14 @@ function resetMenu() {
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="admin.dashboard" class="sAdd">fasdfasfsad</a></h1>
+  <h1><a href="/admin/dashboard" class="sAdd">fasdfasfsad</a></h1>
 </div>
 <!--close-Header-part--> 
 
 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
-  <ul class="nav">
+  <!-- <ul class="nav">
     <li class="dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><a class="sAdd" title="" href="#"><i class="icon-plus"></i> new message</a></li>
@@ -103,13 +102,14 @@ function resetMenu() {
         <li><a class="sTrash" title="" href="#"><i class="icon-trash"></i> trash</a></li>
       </ul>
     </li>
-  </ul>
+  </ul> -->
+  <div>
+  <a title="" href="/login" class="tip-bottom"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a>
+</div>
 </div>
 <!--close-top-Header-menu-->
 
-<div id="search">
-  <a title="" href="/login" class="tip-bottom"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a>
-</div>
+
 
 <!--sidebar-menu-->
 <div id="sidebar"><a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
@@ -123,19 +123,12 @@ function resetMenu() {
         <li><a href="/admin/employee">Employee</a></li>
       </ul>
     </li>
-    <!-- <li class="submenu"> <a href="#"><i class="icon icon-file"></i> <span>Addons</span> <span class="label label-important"></span><i class="icon-chevron-down"></i></a>
-      <ul>
-        <li><a href="/admin/index2">Dashboard2</a></li>
-        <li><a href="/admin/gallery">Gallery</a></li>
-        <li><a href="/admin/calendar">Calendar</a></li>
-        <li><a href="/admin/invoice">Invoice</a></li>
-        <li><a href="/admin/chat">Chat option</a></li>
-      </ul>
-    </li> -->
   </ul>
 </div>
 <!--sidebar-menu-->
 @yield('content')
+@yield('modal')
+@include('sweet::alert')
+@yield('script')
 </body>
-@yield('scripts')
 </html>

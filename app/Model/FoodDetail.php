@@ -22,7 +22,7 @@ class FoodDetail extends Model
      * Variable mass assignement
      * @var type 
      */
-    protected $fillable = ['food_name', 'status', 'food_type_id'];
+    protected $fillable = ['food_name', 'price', 'status', 'food_type_id'];
 
     public function food_type(){
         return $this->belongsTo('App\Model\FoodType', 'food_type_id', 'food_type_id');

@@ -36,7 +36,7 @@ class AdminController extends Controller {
         ->join('event_details', 'event_details.event_id', '=', 'reservation_details.event_id')
         ->get();
 
-        return view($this->view . 'dashboard', ['type' => $type]);
+        return view('/admin/dashboard', ['type' => $type]);
     }
     //END DASHBOARD
 
@@ -117,40 +117,41 @@ class AdminController extends Controller {
         $types = FoodType::where('status',0)->get();
         return view($this->view . 'food', ['var' => $var,'types' => $types ]);
     }
-    public function getfood(Request $req){
-        $type = DB::table('food_details')->where('food_id',$req->id)->get();
+
+    public function getFood(Request $req){
+        $type = FoodDetail::where('food_id',$req->id)->get();
+        dd($type);
         return response()->json($types);
     }
 
     public function addFood(){
-        FoodDetails::insert([ 
+        FoodDetail::insert([ 
             'food_name' => $_POST['name'],
             'food_type_id' => $_POST['type'],
             'price' => $_POST['price'],
             ]);
         alert()->success('Successfully added a food', 'Success')->persistent('Close');
  
-        return view($this->view . 'food');
+        return redirect('/admin/food');
     }
     
-    public function editfood(){
-        // if(DB::table('food_details')->where('food_id', $_POST['id'])->update(['food_name' => $_POST['name']])){
-        //  alert()->success('Successfully edited a food', 'Success')->persistent('Close');
-        // }
-        // alert()->error('Something went wrong editing the food', 'Error')->persistent('Close');
-
-        FoodDetails::where('food_id', $_POST['id'])->update(['food_name' => $_POST['name'], 'price' => $_POST['price']]);
-
-        alert()->success('Successfully edited a food', 'Success')->persistent('Close');
-
-        return redirect()->back();
-    }
-    public function deletefood(){
-        FoodDetails::where('food_id',$_POST['id'])->update([ 
-            'status' => 1
-            ]);
-        alert()->success('Successfully deleted a food', 'Success')->persistent('Close');
+    public function editFood(){
+        if(FoodDetail::where('food_id', $_POST['id'])->update(['food_name' => $_POST['name']])){
+        FoodDetail::where('food_id', $_POST['id'])->update(['food_name' => $_POST['name'], 'price' => $_POST['price']]);
+         alert()->success('Successfully edited a food', 'Success')->persistent('Close');
+        }else{
+        alert()->error('Something went wrong editing the food', 'Error')->persistent('Close');
+        }
         return redirect('/admin/food');
+    }
+    public function deleteFood(){
+        if(FoodDetail::where('food_id', $_POST['id'])->delete()){
+            FoodDetail::where('food_id', $_POST['id'])->delete();
+            alert()->success('Successfully deleted a food', 'Success')->persistent('Close');
+           }else{
+           alert()->error('Something went wrong deleting the food', 'Error')->persistent('Close');
+           }
+           return redirect('/admin/food');
     }
     // END FOOD
 
@@ -175,6 +176,41 @@ class AdminController extends Controller {
         return view($this->view . 'employee', ['employee' => $employee]);
     }
     
+    public function getEmployee(Request $req){
+        $type = Worker::where('worker_id',$req->id)->get();
+        dd($type);
+        return response()->json($types);
+    }
+
+    public function addEmployee(){
+        Worker::insert([ 
+            'food_name' => $_POST['name'],
+            'food_type_id' => $_POST['type'],
+            'price' => $_POST['price'],
+            ]);
+        alert()->success('Successfully added a worker', 'Success')->persistent('Close');
+ 
+        return redirect('/admin/food');
+    }
+    
+    public function editEmployee(){
+        if(Worker::where('worker_id', $_POST['id'])->update(['food_name' => $_POST['name']])){
+            Worker::where('worker_id', $_POST['id'])->update(['food_name' => $_POST['name'], 'price' => $_POST['price']]);
+         alert()->success('Successfully edited a worker', 'Success')->persistent('Close');
+        }else{
+        alert()->error('Something went wrong editing the worker', 'Error')->persistent('Close');
+        }
+        return redirect('/admin/food');
+    }
+    public function deleteEmpoyee(){
+        if(Worker::where('worker_id', $_POST['id'])->delete()){
+            Worker::where('worker_id', $_POST['id'])->delete();
+            alert()->success('Successfully deleted a worker', 'Success')->persistent('Close');
+           }else{
+           alert()->error('Something went wrong deleting the worker', 'Error')->persistent('Close');
+           }
+           return redirect('/admin/food');
+    }
     // END EMPLOYEE
     
 
