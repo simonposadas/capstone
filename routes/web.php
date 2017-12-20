@@ -31,6 +31,9 @@
     Route::get('/foods', function () {
         return view('/admin/food');
     });
+    Route::get('/getFood', 'Admin\AdminController@getFood');
+    Route::post('/editFood', 'Admin\AdminController@editFood');
+    Route::post('/deleteFood', 'Admin\AdminController@deleteFood');
     // end food
 
     // reservation
@@ -43,7 +46,7 @@
     // packages
     Route::get('/admin/packages', 'Admin\AdminController@packages');
     Route::get('/packages', function () {
-        return view('/admin/packages')->name('admin.packages');
+        return view('/admin/packages');
     });
     // end packages
 
@@ -52,6 +55,9 @@
     Route::get('/admin/employee', 'Admin\AdminController@employee');
     Route::get('/employee', function () {
         return view('/admin/employee');
+    Route::get('/getEmployee', 'Admin\AdminController@getEmployee');
+    Route::post('/editEmployee', 'Admin\AdminController@editEmployee');
+    Route::post('/deleteEmpoyee', 'Admin\AdminController@deleteEmpoyee');
     });
     // end employee
 // END ADMIN ROUTES
@@ -59,3 +65,6 @@
 // WEBSITE ROUTES
 
 // END WEBSITE ROUTES
+
+
+Route::get('my-notification/{type}', 'HomeController@myNotification');

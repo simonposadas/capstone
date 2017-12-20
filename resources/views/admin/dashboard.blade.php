@@ -38,7 +38,7 @@
                     <tr>
                       <td>{{$type->reserv_id}}</td>
                       <td>{{$type->cust_fname . " " . $type->cust_lname}}</td>
-                      <td>{{$type ->reserv_guestNo}}</td>
+                      <td>{{$type->reserv_guestNo}}</td>
                       <td>{{$type->cust_budget}}</td>
                       <td>{{$type->place}}</td>
                       <td>{{$type->reserv_date}}</td>

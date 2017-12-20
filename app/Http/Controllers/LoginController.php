@@ -23,7 +23,7 @@ class LoginController extends Controller
         // $pass = $req->input('password');
 
         // if(Auth::attempt(['username'=> $user ,'password'=> $pass ])){
-            return view('/admin/dashboard');  
+            return redirect('/admin/dashboard');  
         // }
         // else{
         //     return redirect()->back()->with('message',['text'=>'Wrong Username and/or Password.']);
