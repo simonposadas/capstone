@@ -73,7 +73,7 @@
             <select name="food_type">
               <option disabled>Select food type</option>
               @foreach($types as $type)
-                <option>{{$type->food_type_name}}</option>
+                <option value="{{$type->food_type_id}}">{{$type->food_type_name}}</option>
               @endforeach
             </select>
           </div>
@@ -103,9 +103,9 @@
         <h4 class="modal-title">Edit Food</h4>
       </div>
       <div class="modal-body">
-        <form method="put" action="/editFood">
+        <form method="post" action="/editFood">
         {{csrf_field()}}
-          <input type="hidden" class="id" name="id" id="editID">		  
+          <input type="hidden" name="id" id="editID">		  
           <div class="form-group">
 		        <label>Food Name</label>
 		        <input type="text" class="form-control inpname" name="name">
@@ -168,20 +168,20 @@
     })
 
     $('.edittype').click(function () {
-        $.ajax
-        ({
-            type : 'Get',
-            url : '/getFood' + $(this).data('id'),
-            data : {"id" : $(this).data('id')},
-            dataType: "json",
-            success: function(response) {
-                response.forEach(function(data){
-                    $('#editModal .id').val($(this).data('id'));
-                    $('#editModal .inpname').val(data.food_name);
-                    $('#editModal .inprice').val(data.price);
-                })
-            }
-        });
+        // $.ajax
+        // ({
+        //     type : 'Get',
+        //     url : '/getFood' + $(this).data('id'),
+        //     data : {"id" : $(this).data('id')},
+        //     dataType: "json",
+        //     success: function(response) {
+        //         response.forEach(function(data){
+        //             $('#editModal .id').val($(this).data('id'));
+        //             $('#editModal .inpname').val(data.food_name);
+        //             $('#editModal .inprice').val(data.price);
+        //         })
+        //     }
+        // });
         $('#editID').val($(this).data('id'));
         $('#editModal').modal('show');
     });
