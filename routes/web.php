@@ -27,13 +27,14 @@
     // end dashboard
 
     // food
-    Route::get('/admin/food', 'Admin\AdminController@food');
+    Route::get('/admin/food', 'Admin\FoodController@food');
     Route::get('/foods', function () {
         return view('/admin/food');
     });
-    Route::get('/getFood', 'Admin\AdminController@getFood');
-    Route::post('/editFood', 'Admin\AdminController@editFood');
-    Route::post('/deleteFood', 'Admin\AdminController@deleteFood');
+    Route::get('/getFood', 'Admin\FoodController@getFood');
+    Route::post('/addFood', 'Admin\FoodController@addFood');
+    Route::post('/editFood', 'Admin\FoodController@editFood');
+    Route::post('/deleteFood', 'Admin\FoodController@deleteFood');
     // end food
 
     // reservation
@@ -44,20 +45,23 @@
     // end reservation
 
     // packages
-    Route::get('/admin/packages', 'Admin\AdminController@packages');
+    Route::get('/admin/packages', 'Admin\PackageController@packages');
     Route::get('/packages', function () {
         return view('/admin/packages');
     });
+    Route::get('/getPack', 'Admin\PackageController@getPack');
+    Route::post('/editPack', 'Admin\PackageController@editPack');
+    Route::post('/deletePack', 'Admin\PackageController@deletePack');
     // end packages
 
 
     // employee
-    Route::get('/admin/employee', 'Admin\AdminController@employee');
+    Route::get('/admin/employee', 'Admin\EmployeeController@employee');
     Route::get('/employee', function () {
         return view('/admin/employee');
-    Route::get('/getEmployee', 'Admin\AdminController@getEmployee');
-    Route::post('/editEmployee', 'Admin\AdminController@editEmployee');
-    Route::post('/deleteEmpoyee', 'Admin\AdminController@deleteEmpoyee');
+    Route::get('/getEmployee', 'Admin\EmployeeController@getEmployee');
+    Route::post('/editEmployee', 'Admin\EmployeeController@editEmployee');
+    Route::post('/deleteEmpoyee', 'Admin\EmployeeController@deleteEmpoyee');
     });
     // end employee
 // END ADMIN ROUTES
@@ -65,6 +69,3 @@
 // WEBSITE ROUTES
 
 // END WEBSITE ROUTES
-
-
-Route::get('my-notification/{type}', 'HomeController@myNotification');
