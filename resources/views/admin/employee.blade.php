@@ -34,8 +34,8 @@
                     <td>{{$emp->worker_fname .' '. $emp->worker_lname}}</td>
                     <td>{{$emp->worker_role_description}}</td>
                     <td >
-                      <button class="btn btn-primary icon-pencil edittype"> Edit</button>
-                      <button class="btn btn-danger icon-trash deletetype"> Delete</button>
+                      <button class="btn btn-primary icon-pencil edittype" data-id="{{$emp->worker_id}}"> Edit</button>
+                      <button class="btn btn-danger icon-trash deletetype" data-id="{{$emp->worker_id}}"> Delete</button>
                     </td>
                   </tr>
                 </tbody>
@@ -60,34 +60,34 @@
       </div>
       <div class="modal-body">
       <form method="post" action="/addEmployee">
-      {{csrf_field()}}		  
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text" class="form-control" placeholder="First Name" name="fname" required>
-        </div>
-        <div class="form-group">
-          <label>Middle Name</label>
-          <input type="text" class="form-control" placeholder="Middle Name" name="mname" required>
-        </div>
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" class="form-control" placeholder="Last Name" name="lname" required>
-        </div>
-        <div class="form-group">
-          <label>Age</label>
-          <input type="number" class="form-control" placeholder="Age" name="age" required>
-        </div>
-        <div class="control-group">
-          <label class="control-label">Select input</label>
-          <div class="controls select2-container">
-            <select name="worker_role">
-              <option disabled>Select worker role</option>
-              @foreach($type as $type)
-                <option value="{{$type->worker_role_id}}">{{$type->worker_role_description}}</option>
-              @endforeach
-            </select>
+        {{csrf_field()}}
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" name="fname" required>
           </div>
-        </div>
+          <div class="form-group">
+            <label>Middle Name</label>
+            <input type="text" class="form-control" placeholder="Middle Name" name="mname" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" name="lname" required>
+          </div>
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" class="form-control" placeholder="Age" name="age" required>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Select input</label>
+            <div class="controls select2-container">
+              <select name="worker_role">
+                <option disabled>Select worker role</option>
+                @foreach($type as $type)
+                  <option value="{{$type->worker_role_id}}">{{$type->worker_role_description}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
       </div>  
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -97,6 +97,7 @@
     </div>
   </div>
 </div>
+
 <!-- end add modal -->
 
 
@@ -109,10 +110,10 @@
         <h4 class="modal-title">Edit Employee</h4>
       </div>
       <div class="modal-body">
-        <form method="put" action="/editEmployee">
+        <form method="post" action="/editEmployee">
         {{csrf_field()}}
           <input type="hidden" class="id" name="id" id="editID">		  
-          <div class="form-group">
+        <div class="form-group">
           <label>First Name</label>
           <input type="text" class="form-control" placeholder="First Name" name="fname" required>
         </div>
@@ -128,19 +129,7 @@
           <label>Age</label>
           <input type="number" class="form-control" placeholder="Age" name="age" required>
         </div>
-        <div class="control-group">
-          <label class="control-label">Select input</label>
-          <div class="controls select2-container">
-            <select name="worker_role">"
-              <option disabled>Select worker role</option>
-              @foreach($type as $types)
-                <option>{{$type->worker_role_description}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-      </div>  
-      </div>  
+        <!--  -->
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
@@ -160,11 +149,11 @@
         <h4 class="modal-title">Delete</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="/deleteFood">
+        <form method="post" action="/deleteEmployee">
         {{csrf_field()}}
         <input type="hidden" class="id" name="id" id="deleteID">		  
         <div class="form-group">
-          <h4>Delete food?</h4>
+          <h4>Delete employee?</h4>
         </div>
       </div>  
 		  <div class="modal-footer">
@@ -194,20 +183,20 @@
     })
 
     $('.edittype').click(function () {
-        $.ajax
-        ({
-            type : 'Get',
-            url : '/getEmployee' + $(this).data('id'),
-            data : {"id" : $(this).data('id')},
-            dataType: "json",
-            success: function(response) {
-                response.forEach(function(data){
-                    // $('#editModal .id').val($(this).data('id'));
-                    // $('#editModal .inpname').val(data.food_name);
-                    // $('#editModal .inprice').val(data.price);
-                })
-            }
-        });
+        // $.ajax
+        // ({
+        //     type : 'Get',
+        //     url : '/getEmployee' + $(this).data('id'),
+        //     data : {id : $(this).data('id')},
+        //     dataType: "json",
+        //     success: function(response) {
+        //         response.forEach(function(data){
+        //             $('#editModal .id').val($(this).data('id'));
+        //             $('#editModal .inpname').val(data.food_name);
+        //             $('#editModal .inprice').val(data.price);
+        //         })
+        //     }
+        // });
         $('#editID').val($(this).data('id'));
         $('#editModal').modal('show');
     });

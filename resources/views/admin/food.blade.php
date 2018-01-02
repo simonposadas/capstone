@@ -168,22 +168,22 @@
     })
 
     $('.edittype').click(function () {
-        // $.ajax
-        // ({
-        //     type : 'Get',
-        //     url : '/getFood' + $(this).data('id'),
-        //     data : {"id" : $(this).data('id')},
-        //     dataType: "json",
-        //     success: function(response) {
-        //         response.forEach(function(data){
-        //             $('#editModal .id').val($(this).data('id'));
-        //             $('#editModal .inpname').val(data.food_name);
-        //             $('#editModal .inprice').val(data.price);
-        //         })
-        //     }
-        // });
-        $('#editID').val($(this).data('id'));
+        $.ajax({
+            type : "get",
+            url : '/getFood' + $(this).data('id'),
+            data : {id : $(this).data('id')},
+            dataType: "json",
+            success: function(response) {
+                response.forEach(function(data){
+                    // $('#editModal .id').val($(this).data('id'));
+                    // $('#editModal .inpname').val(data.food_name);
+                    // $('#editModal .inprice').val(data.price);
+                    alert('fladjf');
+                })
+            }
+        });
         $('#editModal').modal('show');
+        $('#editID').val($(this).data('id'));
     });
 
 

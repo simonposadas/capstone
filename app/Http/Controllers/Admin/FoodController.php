@@ -31,7 +31,10 @@ class FoodController extends Controller {
     }
 
     public function getFood(Request $req){
-        $type = FoodDetail::where('food_id',$req->id)->get();
+        dd('flkjasldf');
+        // $type = FoodDetail::select('*')
+        //     ->where('food_id',$req->id)
+        //     ->get();
         // dd($type);
         return response()->json($types);
     }
@@ -48,7 +51,11 @@ class FoodController extends Controller {
     }
 
     public function editFood(){
-        FoodDetail::where('food_id', $_POST['id'])->update(['food_name' => $_POST['name'], 'price' => $_POST['price']]);
+        FoodDetail::where('food_id', $_POST['id'])
+            ->update(['food_name' => $_POST['name'], 
+            'price' => $_POST['price']
+        ]);
+            
         alert()->success('Successfully edited a food', 'Success')->persistent('Close');
 
         return redirect('/admin/food');

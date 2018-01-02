@@ -50,6 +50,7 @@
         return view('/admin/packages');
     });
     Route::get('/getPack', 'Admin\PackageController@getPack');
+    Route::post('/addPack', 'Admin\PackageController@addPack');
     Route::post('/editPack', 'Admin\PackageController@editPack');
     Route::post('/deletePack', 'Admin\PackageController@deletePack');
     // end packages
@@ -59,11 +60,14 @@
     Route::get('/admin/employee', 'Admin\EmployeeController@employee');
     Route::get('/employee', function () {
         return view('/admin/employee');
-    Route::get('/getEmployee', 'Admin\EmployeeController@getEmployee');
-    Route::post('/editEmployee', 'Admin\EmployeeController@editEmployee');
-    Route::post('/deleteEmpoyee', 'Admin\EmployeeController@deleteEmpoyee');
     });
+    Route::get('/getEmployee', 'Admin\EmployeeController@getEmployee');
+    Route::post('/addEmployee', 'Admin\EmployeeController@addEmployee');
+    Route::post('/editEmployee', 'Admin\EmployeeController@editEmployee');
+    Route::post('/deleteEmployee', 'Admin\EmployeeController@deleteEmployee');
+    
     // end employee
+    
 // END ADMIN ROUTES
 
 // WEBSITE ROUTES
