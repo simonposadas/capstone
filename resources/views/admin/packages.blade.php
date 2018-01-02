@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <hr>
     <div class="pull-left">
-      <button class="btn btn-success btn-large icon-plus addFood"> Add Package</button>
+      <button class="btn btn-success btn-large icon-plus addPack"> Add Package</button>
     </div>
     <div class="row-fluid">
       <div class="colspan">
@@ -48,6 +48,47 @@
 @endsection
 
 @section('modal')
+<!-- add modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="addModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add Food</h4>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="/addFood">
+      {{csrf_field()}}		  
+            <div class="form-group">
+          <label>Package Name</label>
+          <input type="text" class="form-control" placeholder="Package Name" name="pname" required>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Select input</label>
+          <div class="controls select2-container">
+            <select name="food_type">
+              <option disabled>Select food type</option>
+              @foreach($foods as $foods)
+                <option value="{{$foods->food_id}}">{{$foods->food_name}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" class="form-control" placeholder="Price" name="price" required>
+        </div>
+      </div>  
+		  <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<!-- end add modal -->
+
 <!-- delete modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal">
   <div class="modal-dialog" role="document">
@@ -77,6 +118,10 @@
 
 @section('script')
 <script>
+      $('.addPack').click(function () {
+        $('#addModal').modal('show');
+      });
+
 
       $('.deletetype').click(function () {
           $('#deleteID').val($(this).data('id'));

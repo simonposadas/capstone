@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use DB;
 use App\Model\PackageDetail;
+use App\Model\FoodDetail;
 use App\Http\Requests\Reservation\ReservationIdRequest;
 use Notification;
 use App\Notifications\ReservationApprove;
@@ -27,7 +28,9 @@ class PackageController extends Controller {
     public  function packages()
     {
         $package = PackageDetail::where('status', 0)->get();
-        return view($this->view . 'packages', ['packages' => $package]);
+        $food = FoodDetail::where('status', 0)->get();
+        
+        return view($this->view . 'packages', ['packages' => $package, 'foods' => $food]);
     }
 
     public function getPack(Request $req){
@@ -37,11 +40,11 @@ class PackageController extends Controller {
     }
 
     public function addPack(){
-        // PackageDetail::insert([ 
-        //      'food_name' => $_POST['name'],
-        //      'food_type_id' => $_POST['type'],
-        //      'price' => $_POST['price'],
-        //     ]);
+        PackageDetail::insert([ 
+             'food_name' => $_POST['name'],
+             'food_type_id' => $_POST['type'],
+             'price' => $_POST['price'],
+            ]);
         alert()->success('Successfully added a food', 'Success')->persistent('Close');
 
         return redirect('/admin/packages');
