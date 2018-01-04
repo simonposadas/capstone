@@ -7,6 +7,7 @@ use Auth;
 use DB;
 use App\Model\PackageDetail;
 use App\Model\FoodDetail;
+use App\Model\FoodType;
 use App\Http\Requests\Reservation\ReservationIdRequest;
 use Notification;
 use App\Notifications\ReservationApprove;
@@ -28,9 +29,13 @@ class PackageController extends Controller {
     public  function packages()
     {
         $package = PackageDetail::where('status', 0)->get();
-        $food = FoodDetail::where('status', 0)->get();
+        $food = FoodType::where('status', 0)->get();
+        $main = FoodDetail::where('food_type_id', 10)->get();
+        $soup = FoodDetail::where('food_type_id', 2)->get();
+        $app = FoodDetail::where('food_type_id', 11)->get();
+        $salad = FoodDetail::where('food_type_id', 12)->get();
         
-        return view($this->view . 'packages', ['packages' => $package, 'foods' => $food]);
+        return view($this->view . 'packages', ['packages' => $package, 'foods' => $food, 'mains' => $main, 'soups' => $soup, 'apps' => $app, 'salads' => $salad]);
     }
 
     public function getPack(Request $req){
@@ -41,9 +46,8 @@ class PackageController extends Controller {
 
     public function addPack(){
         PackageDetail::insert([ 
-             'food_name' => $_POST['name'],
-             'food_type_id' => $_POST['type'],
-             'price' => $_POST['price'],
+             'package_name' => $_POST['pname'],
+             'package_price' => $_POST['price']
             ]);
         alert()->success('Successfully added a food', 'Success')->persistent('Close');
 

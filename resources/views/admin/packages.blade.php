@@ -57,27 +57,67 @@
         <h4 class="modal-title">Add Food</h4>
       </div>
       <div class="modal-body">
-      <form method="post" action="/addFood">
+      <form method="post" action="/addPack">
       {{csrf_field()}}		  
             <div class="form-group">
           <label>Package Name</label>
           <input type="text" class="form-control" placeholder="Package Name" name="pname" required>
         </div>
-        <div class="control-group">
-          <label class="control-label">Select input</label>
-          <div class="controls select2-container">
-            <select name="food_type">
-              <option disabled>Select food type</option>
-              @foreach($foods as $foods)
-                <option value="{{$foods->food_id}}">{{$foods->food_name}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
         <div class="form-group">
           <label>Price</label>
           <input type="number" class="form-control" placeholder="Price" name="price" required>
         </div>
+        <hr>
+        <!-- <div class="control-group">
+          <h5 class="control-label">Main Dishes</h3>
+          <label class="control-label">Select input</label>
+          <div class="controls select2-container">
+            <select name="food_type">
+              <option disabled>Select food type</option>
+              @foreach($mains as $mains)
+                <option value="{{$mains->food_id}}">{{$mains->food_name}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <div class="control-group">
+          <h5 class="control-label">Soup</h3>
+          <label class="control-label">Select input</label>
+          <div class="controls select2-container">
+            <select name="food_type">
+              <option disabled>Select food type</option>
+              @foreach($soups as $soups)
+                <option value="{{$soups->food_id}}">{{$soups->food_name}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <hr>
+        <div class="control-group">
+          <h5 class="control-label">Appetizer</h3>
+          <label class="control-label">Select input</label>
+          <div class="controls select2-container">
+            <select name="food_type">
+              <option disabled>Select food type</option>
+              @foreach($apps as $apps)
+                <option value="{{$apps->food_id}}">{{$apps->food_name}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
+        <hr>
+        <div class="control-group">
+          <h5 class="control-label">Salads</h3>
+          <label class="control-label">Select input</label>
+          <div class="controls select2-container">
+            <select name="food_type">
+              <option disabled>Select food type</option>
+              @foreach($salads as $salads)
+                <option value="{{$salads->food_id}}">{{$salads->food_name}}</option>
+              @endforeach
+            </select>
+          </div>
+        </div> -->
       </div>  
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
