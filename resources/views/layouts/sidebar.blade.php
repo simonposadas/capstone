@@ -20,39 +20,7 @@
 <link rel="stylesheet" href="{{ asset('css/jquery.gritter.css') }}" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 
-<script src="{{ asset('js/excanvas.min.js') }}"></script> 
-<script src="{{ asset('js/jquery.min.js') }}"></script>
-<script src="{{ asset('js/masked.js') }}"></script>
-<script src="{{ asset('js/jquery.ui.custom.js') }}"></script> 
-<script src="{{ asset('js/bootstrap.min.js') }}"></script> 
-<script src="{{ asset('js/jquery.flot.min.js') }}"></script> 
-<script src="{{ asset('js/jquery.flot.resize.min.js') }}"></script> 
-<script src="{{ asset('js/jquery.peity.min.js') }}"></script> 
-<script src="{{ asset('js/fullcalendar.min.js') }}"></script> 
-<script src="{{ asset('js/matrix.js') }}"></script> 
-<script src="{{ asset('js/matrix.dashboard.js') }}"></script> 
-<script src="{{ asset('js/jquery.gritter.min.js') }}"></script> 
-<script src="{{ asset('js/matrix.interface.js') }}"></script> 
-<script src="{{ asset('js/matrix.chat.js') }}"></script> 
-<script src="{{ asset('js/matrix.charts.js') }}"></script> 
-<script src="{{ asset('js/matrix.calendar.js') }}"></script> 
-<script src="{{ asset('js/jquery.validate.js') }}"></script> 
-<script src="{{ asset('js/matrix.form_validation.js') }}"></script> 
-<script src="{{ asset('js/matrix.form_common.js') }}"></script> 
-<script src="{{ asset('js/jquery.wizard.js') }}"></script> 
-<script src="{{ asset('js/jquery.uniform.js') }}"></script> 
-<script src="{{ asset('js/select2.min.js') }}"></script> 
-<script src="{{ asset('js/matrix.popover.js') }}"></script> 
-<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script> 
-<script src="{{ asset('js/matrix.tables.js') }}"></script> 
-<script src="{{ asset('js/matrix.wizard.js') }}"></script> 
-<script src="{{ asset('js/bootstrap-wysihtml5.js') }}"></script> 
-<script src="{{ asset('js/wysihtml5-0.3.0.js') }}"></script> 
-<script src="{{ asset('js/bootstrap-colorpicker.js') }}"></script> 
-<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script> 
-<script src="{{ asset('js/jquery.flot.min.js') }}"></script> 
-<script src="{{ asset('js/jquery.flot.pie.min.js') }}"></script> 
-<script src="{{ asset('js/sweetalert.min.js') }}"></script> 
+
 
 <script type="text/javascript">
   // This function is called from the pop-up menus to transfer to
@@ -119,8 +87,10 @@ function resetMenu() {
     <li class="submenu"> <a href="#"><i class="icon icon-th"></i> <span>Maintenance</span> <span class=""></span><i class="icon-chevron-down"></i></a>
       <ul>
         <li><a href="/admin/food">Food</a></li>
+        <li><a href="/admin/foodtype">Food Type</a></li>
         <li><a href="/admin/packages">Packages</a></li>
         <li><a href="/admin/employee">Employee</a></li>
+        <li><a href="/admin/employeerole">Worker Role</a></li>
       </ul>
     </li>
   </ul>
@@ -128,7 +98,41 @@ function resetMenu() {
 <!--sidebar-menu-->
 @yield('content')
 @yield('modal')
+
+<script src="{{ asset('js/excanvas.min.js') }}"></script> 
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/masked.js') }}"></script>
+<script src="{{ asset('js/jquery.ui.custom.js') }}"></script> 
+<script src="{{ asset('js/bootstrap.min.js') }}"></script> 
+<script src="{{ asset('js/jquery.flot.min.js') }}"></script> 
+<script src="{{ asset('js/jquery.flot.resize.min.js') }}"></script> 
+<script src="{{ asset('js/jquery.peity.min.js') }}"></script> 
+<script src="{{ asset('js/fullcalendar.min.js') }}"></script> 
+<script src="{{ asset('js/matrix.js') }}"></script> 
+<script src="{{ asset('js/matrix.dashboard.js') }}"></script> 
+<script src="{{ asset('js/jquery.gritter.min.js') }}"></script> 
+<script src="{{ asset('js/matrix.interface.js') }}"></script> 
+<script src="{{ asset('js/matrix.chat.js') }}"></script> 
+<script src="{{ asset('js/matrix.charts.js') }}"></script> 
+<script src="{{ asset('js/matrix.calendar.js') }}"></script> 
+<script src="{{ asset('js/jquery.validate.js') }}"></script> 
+<script src="{{ asset('js/matrix.form_validation.js') }}"></script> 
+<script src="{{ asset('js/matrix.form_common.js') }}"></script> 
+<script src="{{ asset('js/jquery.wizard.js') }}"></script> 
+<script src="{{ asset('js/jquery.uniform.js') }}"></script> 
+<script src="{{ asset('js/select2.min.js') }}"></script> 
+<script src="{{ asset('js/matrix.popover.js') }}"></script> 
+<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script> 
+<script src="{{ asset('js/matrix.tables.js') }}"></script> 
+<script src="{{ asset('js/matrix.wizard.js') }}"></script> 
+<script src="{{ asset('js/bootstrap-wysihtml5.js') }}"></script> 
+<script src="{{ asset('js/wysihtml5-0.3.0.js') }}"></script> 
+<script src="{{ asset('js/bootstrap-colorpicker.js') }}"></script> 
+<script src="{{ asset('js/bootstrap-datepicker.js') }}"></script> 
+<script src="{{ asset('js/jquery.flot.min.js') }}"></script> 
+<script src="{{ asset('js/jquery.flot.pie.min.js') }}"></script> 
+<script src="{{ asset('js/sweetalert.min.js') }}"></script> 
 @include('sweet::alert')
-@yield('script')
+@yield('script') 
 </body>
 </html>

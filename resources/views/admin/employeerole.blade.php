@@ -1,41 +1,36 @@
 @extends('layouts.sidebar')
 
-@section('title', 'Employee')
+@section('title', 'Employee Role')
 @section('content')
 
 <div id="content">
 <div id="content-header">
   <div id="breadcrumb"> <a href="/admin/dashboard" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Employee</a> </div>
-  <h1>Employees</h1>
+  <h1>Employee Roles</h1>
 </div>
 <div class="container-fluid">
     <hr>
     <div class="pull-left">
-      <button class="btn btn-success btn-large icon-plus addWorker"> Add Worker</button>
+      <button class="btn btn-success btn-large icon-plus addWorkerRole"> Add Worker Role</button>
     </div>
     <div class="row-fluid">
       <div class="span12">
         <div class="widget-box">
-        <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-          <h5>Data table</h5>
-        </div>
         <div class="widget-content nopadding">
           <table class="table table-bordered data-table" id="emp_table">
             <thead>
               <tr>
-                <th>Employee Name</th>
-                <th>Role</th>
+                <th>Employee Role</th>
                 <th>Actions</th>
               </tr>
             </thead>
-              @foreach($employee as $emp)
+              @foreach($type as $type)
                 <tbody>
                   <tr>
-                    <td>{{$emp->worker_fname .' '. $emp->worker_lname}}</td>
-                    <td>{{$emp->worker_role_description}}</td>
+                    <td>{{$type->worker_role_description}}</td>
                     <td >
-                      <button class="btn btn-primary icon-pencil edittype" data-id="{{$emp->worker_id}}"> Edit</button>
-                      <button class="btn btn-danger icon-trash deletetype" data-id="{{$emp->worker_id}}"> Delete</button>
+                      <button class="btn btn-primary icon-pencil edittype" data-id="{{$type->worker_role_id}}"> Edit</button>
+                      <button class="btn btn-danger icon-trash deletetype" data-id="{{$type->worker_role_id}}"> Delete</button>
                     </td>
                   </tr>
                 </tbody>
@@ -45,7 +40,6 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 @endsection
 
@@ -56,38 +50,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Add Employee</h4>
+        <h4 class="modal-title">Add Food</h4>
       </div>
       <div class="modal-body">
-      <form method="post" action="/addEmployee">
-        {{csrf_field()}}
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control" placeholder="First Name" name="fname" required>
-          </div>
-          <div class="form-group">
-            <label>Middle Name</label>
-            <input type="text" class="form-control" placeholder="Middle Name" name="mname" required>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control" placeholder="Last Name" name="lname" required>
-          </div>
-          <div class="form-group">
-            <label>Age</label>
-            <input type="number" class="form-control" placeholder="Age" name="age" required>
-          </div>
-          <div class="control-group">
-            <label class="control-label">Select input</label>
-            <div class="controls select2-container">
-              <select name="worker_role">
-                <option disabled>Select worker role</option>
-                @foreach($type as $type)
-                  <option value="{{$type->worker_role_id}}">{{$type->worker_role_description}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
+      <form method="post" action="/addEmployeeRole">
+      {{csrf_field()}}		  
+            <div class="form-group">
+          <label>Worker Role</label>
+          <input type="text" class="form-control" placeholder="Worker Role" name="role" required>
+        </div>
       </div>  
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -97,9 +68,7 @@
     </div>
   </div>
 </div>
-
 <!-- end add modal -->
-
 
 <!-- edit modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="editModal">
@@ -107,31 +76,19 @@
     <div class="modal-content" >
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edit Employee</h4>
+        <h4 class="modal-title">Edit Employee Role</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="/editEmployee">
+        <form method="post" action="/editEmployeeRole">
         {{csrf_field()}}
           <input type="hidden" class="id" name="id" id="editID">		  
         <div class="form-group">
-          <label>First Name</label>
-          <input type="text" class="form-control" placeholder="First Name" name="fname" required>
+          <label>Worker Role</label>
+          <input type="text" class="form-control" placeholder="Worker Role" name="role" required>
         </div>
-        <div class="form-group">
-          <label>Middle Name</label>
-          <input type="text" class="form-control" placeholder="Middle Name" name="mname" required>
-        </div>
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" class="form-control" placeholder="Last Name" name="lname" required>
-        </div>
-        <div class="form-group">
-          <label>Age</label>
-          <input type="number" class="form-control" placeholder="Age" name="age" required>
         </div>
         <!--  -->
-        </div>
-		  <div class="modal-footer">
+		<div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
@@ -150,11 +107,11 @@
         <h4 class="modal-title">Delete</h4>
       </div>
       <div class="modal-body">
-        <form method="post" action="/deleteEmployee">
+        <form method="post" action="/deleteEmployeeRole">
         {{csrf_field()}}
         <input type="hidden" class="id" name="id" id="deleteID">		  
         <div class="form-group">
-          <h4>Delete employee?</h4>
+          <h4>Delete worker role?</h4>
         </div>
       </div>  
 		  <div class="modal-footer">
@@ -172,7 +129,7 @@
 
 <script type="text/javascript">
    
-    $('.addWorker').click(function () {
+    $('.addWorkerRole').click(function () {
       $('#addModal').modal('show');
     });
 

@@ -37,10 +37,24 @@
     Route::post('/deleteFood', 'Admin\FoodController@deleteFood');
     // end food
 
+    // food type
+    Route::get('/admin/foodtype', 'Admin\FoodTypeController@foodType');
+    Route::get('/foodType', function () {
+        return view('/admin/foodtype');
+    });
+    Route::get('/getFoodType', 'Admin\FoodTypeController@getFoodType');
+    Route::post('/addFoodType', 'Admin\FoodTypeController@addFoodType');
+    Route::post('/editFoodType', 'Admin\FoodTypeController@editFoodType');
+    Route::post('/deleteFoodType', 'Admin\FoodTypeController@deleteFoodType');
+    // end food type
+
     // reservation
     Route::get('/admin/reservation', 'Admin\ReservationController@reservation');
     Route::get('/reservations', function () {
         return view('/admin/reservations');
+    });
+    Route::get('/admin/reservation_create', function () {
+        return view('/admin/reservation_create');
     });
     // end reservation
 
@@ -65,8 +79,18 @@
     Route::post('/addEmployee', 'Admin\EmployeeController@addEmployee');
     Route::post('/editEmployee', 'Admin\EmployeeController@editEmployee');
     Route::post('/deleteEmployee', 'Admin\EmployeeController@deleteEmployee');
-    
     // end employee
+
+    // employee role
+    Route::get('/admin/employeerole', 'Admin\EmployeeRoleController@employeeRole');
+    Route::get('/employeerole', function () {
+        return view('/admin/employeerole');
+    });
+    Route::get('/getEmployeeRole', 'Admin\EmployeeRoleController@getEmployeeRole');
+    Route::post('/addEmployeeRole', 'Admin\EmployeeRoleController@addEmployeeRole');
+    Route::post('/editEmployeeRole', 'Admin\EmployeeRoleController@editEmployeeRole');
+    Route::post('/deleteEmployeeRole', 'Admin\EmployeeRoleController@deleteEmployeeRole');
+    // end employee role
     
 // END ADMIN ROUTES
 

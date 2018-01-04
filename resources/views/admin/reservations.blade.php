@@ -6,11 +6,14 @@
 <!--main-container-part-->
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Reservations</a> </div>
+    <div id="breadcrumb"> <a href="/admin/dashboard" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Reservations</a> </div>
   <h1>Reservations</h1>
 </div>
 <div class="container-fluid">
   <hr>
+  <div class="pull-left">
+  <a href="/admin/reservation_create"><button class="btn btn-success btn-small icon-plus"> Create Reservation</button></a>
+  </div>
   <div class="row-fluid">
     <div class="colspan">
       <div class="widget-box">
